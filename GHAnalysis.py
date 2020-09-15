@@ -45,10 +45,10 @@ if __name__ == '__main__':
     repo=''
     event=''
     #命令参数
-    opt2,arv2= getopt.getopt(sys.argv[1:],'i:u:r:e:',['user=','repo=','event=','init='])
+    opt,arv= getopt.getopt(sys.argv[1:],'i:u:r:e:',['user=','repo=','event=','init='])
     #初始化
-    if opt2[0][0] == '-i' or opt2[0][0] == '--init':
-        read_json(opt2[0][1])
+    if opt[0][0] == '-i' or opt[0][0] == '--init':
+        read_json(opt[0][1])
         print(0)
         exit()
     else:#数据读取
@@ -56,34 +56,19 @@ if __name__ == '__main__':
             for line in f:
                 data.append(json.loads(line))
     #查询信息
-    for i in range(0,len(opt2)):
-        if '--user' == opt2[i][0]:
-            username=opt2[i][1]
+    for i in range(0,len(opt)):
+        if '--user' == opt[i][0] or '-u' == opt[i][0]:
+            username=opt[i][1]
             continue
         else:
             pass
-        if '-u' == opt2[i][0]:
-            username=opt2[i][1]
+        if '--repo' == opt[i][0] or '-r' == opt[i][0]:
+            repo=opt[i][1]
             continue
         else:
             pass
-        if '--repo' == opt2[i][0]:
-            repo=opt2[i][1]
-            continue
-        else:
-            pass
-        if '-r' == opt2[i][0]:
-            repo=opt2[i][1]
-            continue
-        else:
-            pass
-        if '--event' == opt2[i][0]:
-            event=opt2[i][1]
-            continue
-        else:
-            pass
-        if '-e' == opt2[i][0]:
-            event=opt2[i][1]
+        if '--event' == opt[i][0] or '-e' == opt[i][0]:
+            event=opt[i][1]
             continue
         else:
             pass

@@ -2,14 +2,12 @@ import sys,getopt,json,os
 
 #批量读取json文件 初始化
 def read_json(path):
-    data=[]
     filelist = os.listdir(path)#读取文件列表
     f2=open('data.json','w',encoding='utf-8')
     for file in filelist:#读json文件
         pathname=path+'\\'+file
         with open(pathname,encoding='utf-8') as f:
             for line in f:
-                data.append(json.loads(line))
                 f2.write(line)#写入data.json
     return
 
@@ -47,30 +45,21 @@ if __name__ == '__main__':
     #命令参数
     opt,arv= getopt.getopt(sys.argv[1:],'i:u:r:e:',['user=','repo=','event=','init='])
     #初始化
-    if opt[0][0] == '-i' or opt[0][0] == '--init':
+    if opt in ("-i" , "--init"):
         read_json(opt[0][1])
         print(0)
         exit()
     else:#数据读取
-        with open('data.json',encoding='utf-8') as f:
+        with open('data.json', encoding='utf-8') as f:
             for line in f:
                 data.append(json.loads(line))
     #查询信息
-    for i in range(0,len(opt)):
-        if '--user' == opt[i][0] or '-u' == opt[i][0]:
-            username=opt[i][1]
-            continue
-        else:
-            pass
-        if '--repo' == opt[i][0] or '-r' == opt[i][0]:
-            repo=opt[i][1]
-            continue
-        else:
-            pass
-        if '--event' == opt[i][0] or '-e' == opt[i][0]:
-            event=opt[i][1]
-            continue
-        else:
-            pass
+    for o,a in opt:
+        if o in ("-u","--user"):
+            username = a
+        elif o in("-r","--repo"):
+            repo = a
+        elif o in ("-e","--event"):
+            event = a
     #查询
-    print(caculate_ans(data,username,repo,event))
+    print(caculate_ans(data , username , repo , event))

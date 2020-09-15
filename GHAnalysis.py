@@ -10,7 +10,8 @@ def read_json(path):
         with open(pathname,encoding='utf-8') as f:
             for line in f:
                 data.append(json.loads(line))
-                f2.write(line)
+                f2.write(line)#逐行写入
+    return
 
 #获得答案
 def caculate_ans(data,username,repo,event):
@@ -30,8 +31,7 @@ def caculate_ans(data,username,repo,event):
                 pass
         else:
             pass
-        #判断项目
-        if da['type'] == event:
+        if da['type'] == event:#判断项目
                 ans=ans+1
         else:
             pass

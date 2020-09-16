@@ -50,7 +50,7 @@ if __name__ == '__main__':
         print(0)
         exit()
     else:#数据读取
-        with open('data.json', encoding='utf-8') as f:
+        with open("data.json", encoding='utf-8') as f:
             for line in f:
                 data.append(json.loads(line))
     #查询信息
